@@ -28,14 +28,14 @@
     <!--actionbar-->
     <string name="action_settings">Setting</string>
     <string name="action_edit">Edit</string>
-    <string name="action_preview">Preview</string>
+    <string name="action_open">Open</string>
     <string name="action_save">Save</string>
 
     <string name="press_back">Go back home!</string>
     <string name="press_setting">Setting content</string>
     <string name="press_edit">Edit content </string>
     <string name="press_save">Save content</string>
-    <string name="press_preview">Previous content</string>
+    <string name="press_open">Open content</string>
 
     <!-- toast-->
     <string name="toast">opening user setting</string>

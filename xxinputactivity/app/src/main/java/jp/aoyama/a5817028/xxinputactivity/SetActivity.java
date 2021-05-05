@@ -117,7 +117,7 @@ public class SetActivity extends AppCompatActivity implements AdapterView.OnItem
 
     public void saveTxtFile(){
         // import present time
-        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd_HH:mm:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd_HHmmss");
         Date time = new Date();
 
         String presentTime = format1.format(time);

@@ -2,6 +2,7 @@ package jp.aoyama.a5817028.xxinputactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class InputActivity extends AppCompatActivity {
 
@@ -66,26 +73,49 @@ public class InputActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings :
+            case R.id.action_settings:
                 // TODO : process the click event for action_search item.
                 TextView textView0 = (TextView) findViewById(R.id.textView2);
-                textView0.append("\n "+getResources().getString(R.string.press_setting));
-                return true ;
-            case R.id.action_edit :
+                textView0.append("\n " + getResources().getString(R.string.press_setting));
+                return true;
+            case R.id.action_edit:
                 // TODO : process the click event for action_search item.
                 TextView textView1 = (TextView) findViewById(R.id.textView2);
-                textView1.append("\n "+getResources().getString(R.string.press_edit));
-                return true ;
-            case R.id.action_preview :
+                textView1.append("\n " + getResources().getString(R.string.press_edit));
+                return true;
+            case R.id.action_open:
                 // TODO : process the click event for action_search item.
                 TextView textView2 = (TextView) findViewById(R.id.textView2);
-                textView2.append("\n "+getResources().getString(R.string.press_preview));
-                return true ;
-            case R.id.action_save :
+                textView2.append("\n " + getResources().getString(R.string.press_open));
+                return true;
+            case R.id.action_save:
                 // TODO : process the click event for action_search item.
                 TextView textView3 = (TextView) findViewById(R.id.textView2);
-                textView3.append("\n "+getResources().getString(R.string.press_save));
-                return true ;
+                textView3.append("\n " + getResources().getString(R.string.press_save));
+
+                    //save as txt.file
+                    // import present time
+                    SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd_HHmmss");
+                    Date time = new Date();
+
+                    String presentTime = format1.format(time);
+
+                    // set filename
+                    String filename = "KJinputactivity_content-" + presentTime + ".txt";
+                    File file = new File(getFilesDir(), filename);
+
+                    // set file content
+                    String fileContents = textView3.getText().toString();
+                    try {
+                        FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+                        fos.write(fileContents.getBytes());
+                        Toast.makeText(this, "saved to " + getFilesDir()+ "/" + filename, Toast.LENGTH_SHORT).show();
+                    }
+                    catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+            return true ;
 
             // back button 눌렀을 때
             case android.R.id.home:
@@ -97,5 +127,9 @@ public class InputActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item) ;
         }
     }
+
+
+
+
 
 }
