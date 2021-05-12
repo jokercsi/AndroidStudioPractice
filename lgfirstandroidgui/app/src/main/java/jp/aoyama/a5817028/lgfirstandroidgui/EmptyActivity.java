@@ -30,8 +30,6 @@ public class EmptyActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         // back button in actionbar title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
     //showing actionbar

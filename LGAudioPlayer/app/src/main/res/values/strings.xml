@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">LG Audio Player</string>
+    <!--actionbar menu-->
+    <string name="action_settings">Setting</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_open">Open</string>
+    <string name="action_save">Save</string>
+
+    <string name="music">Media duration = 3:30 \n Current position = </string>
+
+    <string name="start">Music start At :</string>
+    <string name="stop">Music stop At :</string>
+    <string name="pause">Music pause At :</string>
+
+</resources>

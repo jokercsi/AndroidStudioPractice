@@ -29,6 +29,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class InputActivity extends AppCompatActivity {
 
     private String txtFile;
@@ -47,6 +48,7 @@ public class InputActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
+
 
     public void myBtnClick(View v){
 
