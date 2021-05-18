@@ -37,8 +37,6 @@ public class EmptyActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_action_bar, menu);
-
-
         return true;
     }
 
@@ -77,7 +75,6 @@ public class EmptyActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item) ;
         }
     }
-
 
     public void myBtnClick(View v){
         if (v.getId()==R.id.play_btn){

@@ -6,10 +6,9 @@
     <string name="action_open">Open</string>
     <string name="action_save">Save</string>
 
-    <string name="music">Media duration = 3:30 \n Current position = </string>
 
-    <string name="start">Music start At :</string>
-    <string name="stop">Music stop At :</string>
-    <string name="pause">Music pause At :</string>
+    <string name="start">Media duration is </string>
+    <string name="stop">Music stop at </string>
+    <string name="pause">Current position is </string>
 
 </resources>

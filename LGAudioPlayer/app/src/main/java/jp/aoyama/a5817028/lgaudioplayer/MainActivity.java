@@ -3,29 +3,30 @@ package jp.aoyama.a5817028.lgaudioplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    static final String TAG = "MediaRecording";
     MediaPlayer mp;
+    MediaRecorder recorder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        try {
-//            Thread.sleep(3000);  // Thread.sleep = countdown time
-//            mp.stop();
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -34,30 +35,81 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     public void myBtnClick(View v){
 
         TextView textView0 = (TextView) findViewById(R.id.textInImage);
 
+        long min, sec;
+
         if (v.getId()==R.id.play_btn){
             mp = MediaPlayer.create(this, R.raw.kalimba);
             mp.start();
+            // 노래 전체 시간 가져오기
+            int msDur = mp.getDuration();
 
-            textView0.append("\n "+getResources().getString(R.string.start));
+            min = (msDur / 1000) / 60 % 60;
+            sec = (msDur / 1000) % 60;
+
+            textView0.append("\n "+getResources().getString(R.string.start)+ " " + min + " : " + sec);
 
         }
         else if (v.getId()==R.id.stop_btn){
-            mp.stop();
-            mp.reset();
+            if(mp.isPlaying()== true){
+                mp.stop();
+                // 노래의 현재시간 가져오기
+                int msCur = mp.getCurrentPosition();
 
-            textView0.append("\n "+getResources().getString(R.string.stop));
+                min = (msCur / 1000) / 60 % 60;
+                sec = (msCur / 1000) % 60;
+
+                mp.reset();
+                textView0.append("\n "+getResources().getString(R.string.stop)+ " "  + min + " : " + sec );
+            }
+            else if (null != recorder) {
+                try{
+                    recorder.stop();
+                    recorder.reset();
+                    recorder.release();
+                }catch (RuntimeException e){
+                    e.printStackTrace();
+                }
+            }
+            else{
+                Toast.makeText(MainActivity.this,
+                        "Your Message", Toast.LENGTH_LONG).show();
+            }
+
         }
         else if (v.getId()==R.id.pause_btn){
             mp.pause();
+            int msCur = mp.getCurrentPosition();
 
-            textView0.append("\n "+getResources().getString(R.string.pause));
+            min = (msCur / 1000) / 60 % 60;
+            sec = (msCur / 1000) % 60;
+
+            textView0.append("\n "+getResources().getString(R.string.pause)+ " "  + min + " : " + sec);
 
         }
+
         else if (v.getId()==R.id.rec_btn){
+
+            recorder = new MediaRecorder();
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            //保存先
+            String filePath = Environment.getExternalStorageDirectory() + "/audio.3gp";
+            recorder.setOutputFile(filePath);
+
+            //録音準備＆録音開始
+            try {
+                recorder.prepare();
+                recorder.start();   //録音開始
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }
     }
